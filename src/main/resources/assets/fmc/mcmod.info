@@ -1,0 +1,16 @@
+[
+    {
+        "modid": "FunctionalModernComputers",
+        "name": "FunctionalModernComputers",
+        "description": "A mod with some functional (literally) computers",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "/** UNDER CONSTRUCTION **/",
+        "updateUrl": "",
+        "authorList": ["Sunnysky"],
+        "credits": "",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
+]

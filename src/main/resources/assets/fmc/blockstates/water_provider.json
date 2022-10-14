@@ -1,0 +1,5 @@
+{
+  "variants":{
+    "normal": { "model": "fmc:water_provider" }
+  }
+}

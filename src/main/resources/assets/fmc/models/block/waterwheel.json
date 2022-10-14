@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "fmc:blocks/common-panel-unsigned",
+    "down": "fmc:blocks/waterwheel-down",
+    "up": "fmc:blocks/waterwheel-up",
+    "north": "fmc:blocks/waterwheel-front",
+    "south": "fmc:blocks/waterwheel-back",
+    "west": "fmc:blocks/waterwheel-side",
+    "east": "fmc:blocks/waterwheel-side"
+  }
+}

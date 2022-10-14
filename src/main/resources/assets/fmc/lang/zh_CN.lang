@@ -1,0 +1,15 @@
+mod.fmc.name=现代计算机
+
+itemGroup.fmc.main=现代计算机
+
+item.andgate.name=与门
+item.orgate.name=或门
+
+
+tile.waterwheel.name=水轮机
+tile.water_provider.name=水轮机供水槽
+
+tooltip.usage=用法
+
+tooltip.water_provider=仅可以为水轮机供水！
+tooltip.water_provider.usage=把它置于水轮机正上方，不要有间隔。

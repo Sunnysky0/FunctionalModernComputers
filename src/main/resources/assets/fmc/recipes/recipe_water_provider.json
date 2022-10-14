@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "fmc:water_provider"
+  },
+  "pattern": [
+    "dwd",
+    "wrw",
+    "dwd"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "w": {
+      "item": "minecraft:water_bucket"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "d": {
+      "item": "minecraft:iron_ingot",
+      "data": 0
+    }
+  }
+}
