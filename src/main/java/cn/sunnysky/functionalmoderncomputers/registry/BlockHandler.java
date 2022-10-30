@@ -34,4 +34,6 @@ public class BlockHandler {
                     c.accept(b);
             });
     }
+
+    public static int size() { return BLOCKS.size(); }
 }

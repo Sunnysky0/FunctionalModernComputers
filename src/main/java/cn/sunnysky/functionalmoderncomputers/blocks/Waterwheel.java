@@ -3,7 +3,9 @@ package cn.sunnysky.functionalmoderncomputers.blocks;
 import cn.sunnysky.functionalmoderncomputers.api.BlockWithDirection;
 import cn.sunnysky.functionalmoderncomputers.api.IWithTileEntity;
 import cn.sunnysky.functionalmoderncomputers.blocks.tiles.TileWaterwheel;
+import cn.sunnysky.functionalmoderncomputers.items.itemblocks.ItemWaterwheel;
 import cn.sunnysky.functionalmoderncomputers.items.itemgroups.FMCMainGroup;
+import cn.sunnysky.functionalmoderncomputers.registry.ItemHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -62,5 +64,10 @@ public class Waterwheel extends BlockWithDirection implements IWithTileEntity<Ti
         final TileWaterwheel waterwheel = new TileWaterwheel();
         waterwheel.setWorld(worldIn);
         return waterwheel;
+    }
+
+    @Override
+    protected void registerItemBlock(String name) {
+        ItemHandler.register(new ItemWaterwheel(this).setRegistryName(name));
     }
 }

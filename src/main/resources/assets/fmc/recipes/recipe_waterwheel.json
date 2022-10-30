@@ -1,0 +1,28 @@
+{
+  "result": {
+    "item": "fmc:waterwheel"
+  },
+  "pattern": [
+    "crc",
+    "wdw",
+    "cpc"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "w": {
+      "item": "minecraft:iron_ingot"
+    },
+    "c": {
+      "item": "minecraft:redstone"
+    },
+    "r": {
+      "item": "fmc:bearing"
+    },
+    "p": {
+      "item": "minecraft:piston"
+    },
+    "d": {
+      "item": "fmc:turbine_blade"
+    }
+  }
+}

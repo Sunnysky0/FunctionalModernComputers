@@ -2,20 +2,38 @@ mod.fmc.name=Functional Modern Computers
 
 itemGroup.fmc.main=Functional Modern Computers
 
+##########
+# Blocks #
+##########
+
 item.andgate.name=AND Gate
 item.orgate.name=OR Gate
+
+item.iron_rod.name=Iron Rod
+item.bearing.name=Bearing
+item.turbine_blade.name=Turbine Blade
 
 ##########
 # Blocks #
 ##########
 
-tile.waterwheel.name=Waterwheel
-tile.water_provider.name=Waterwheel Water Provider
+tile.waterwheel.name=Waterwheel Generator
+tile.water_provider.name=Water Supply Tank
+
+
+
 
 ############
 # Tooltips #
 ############
 tooltip.usage=Usage
+tooltip.power_generation=Power Generation
 
 tooltip.water_provider=Only compatible with Waterwheel!
 tooltip.water_provider.usage=Put it above a Waterwheel without spaces.
+
+tooltip.waterwheel=Used with Water Supply Tank
+tooltip.waterwheel.pg=1024 rf/t
+
+
+

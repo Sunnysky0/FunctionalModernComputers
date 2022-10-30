@@ -1,7 +1,7 @@
 [
     {
-        "modid": "FunctionalModernComputers",
-        "name": "FunctionalModernComputers",
+        "modid": "fmc",
+        "name": "Functional Modern Computers",
         "description": "A mod with some functional (literally) computers",
         "version": "${version}",
         "mcversion": "${mcversion}",

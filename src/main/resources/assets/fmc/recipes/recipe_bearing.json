@@ -1,19 +1,16 @@
 {
   "result": {
-    "item": "fmc:water_provider"
+    "item": "fmc:bearing"
   },
   "pattern": [
     "dwd",
-    "wrw",
+    "w w",
     "dwd"
   ],
   "type": "forge:ore_shaped",
   "key": {
     "w": {
-      "item": "minecraft:water_bucket"
-    },
-    "r": {
-      "item": "minecraft:cauldron"
+      "item": "minecraft:iron_nugget"
     },
     "d": {
       "item": "minecraft:iron_ingot",

@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static cn.sunnysky.functionalmoderncomputers.FunctionalModernComputers.log;
-import static cn.sunnysky.functionalmoderncomputers.FunctionalModernComputers.proxy;
 
 /**
  * This is a special class that listens to registry events, to allow creation of mod blocks and items at the proper time.
@@ -21,9 +20,11 @@ public class ObjectRegistryHandler {
     /** Listen for the register event for creating custom items */
     @SubscribeEvent
     public static void addItems(RegistryEvent.Register<Item> event) {
+        log.info("Generating rods");
+        ItemHandler.createCraftingMaterials();
         log.info("Registering items");
         event.getRegistry().registerAll(ItemHandler.items());
-        log.info("Registered " + ItemHandler.items().length + " items");
+        log.info("Registered " + ItemHandler.size() + " items");
            /*
              event.getRegistry().register(new ItemBlock(Blocks.myBlock).setRegistryName(MOD_ID, "myBlock"));
              event.getRegistry().register(new MySpecialItem().setRegistryName(MOD_ID, "mySpecialItem"));
@@ -34,7 +35,7 @@ public class ObjectRegistryHandler {
     public static void addBlocks(RegistryEvent.Register<Block> event) {
         log.info("Registering blocks");
         event.getRegistry().registerAll(BlockHandler.blocks());
-        log.info("Registered " + ItemHandler.items().length + " blocks");
+        log.info("Registered " + BlockHandler.size() + " blocks");
            /*
              event.getRegistry().register(new MySpecialBlock().setRegistryName(MOD_ID, "mySpecialBlock"));
             */

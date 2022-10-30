@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "fmc:turbine_blade"
+  },
+  "pattern": [
+    " w ",
+    "wdw",
+    " w "
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "w": {
+      "item": "minecraft:iron_ingot"
+    },
+    "d": {
+      "item": "fmc:iron_rod",
+      "data": 0
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "result": {
+    "item": "fmc:iron_rod"
+  },
+  "pattern": ["www"],
+  "type": "forge:ore_shaped",
+  "key": {
+    "w": {
+      "item": "minecraft:iron_ingot"
+    }
+  }
+}

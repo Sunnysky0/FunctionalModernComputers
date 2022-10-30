@@ -85,7 +85,6 @@ public class TileWaterwheel extends TileEntity implements IEnergyProvider, ITick
                 instanceof TileWaterProvider)
             storage.receiveEnergy(TileWaterwheel.maxExtract,false);
 
-
         if ((storage.getEnergyStored() > 0)) {
             for (int i = 0; i < 6; i++){
                 TileEntity tile = getWorld().getTileEntity(
