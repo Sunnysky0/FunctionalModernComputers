@@ -22,7 +22,7 @@ public class TileWaterwheel extends TileEntity implements IEnergyProvider, ITick
 
     public EnergyStorage storage = new EnergyStorage((int) Math.pow(2,15));
 
-    public static final int maxExtract = 1024;
+    public static final int maxExtract = 256;
 
     private final IEnergyStorage energyCap;
 

@@ -8,6 +8,8 @@ item.iron_rod.name=铁棒
 item.bearing.name=滚珠轴承
 item.turbine_blade.name=涡轮叶片
 
+gui.infinite=∞
+
 
 tile.waterwheel.name=水轮机
 tile.water_provider.name=水轮机供水槽

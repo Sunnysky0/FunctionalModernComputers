@@ -2,6 +2,7 @@ package cn.sunnysky.functionalmoderncomputers.items.itemblocks;
 
 import cn.sunnysky.functionalmoderncomputers.CommonProxy;
 import cn.sunnysky.functionalmoderncomputers.blocks.Waterwheel;
+import cn.sunnysky.functionalmoderncomputers.blocks.tiles.TileWaterwheel;
 import cn.sunnysky.functionalmoderncomputers.util.EnumColor;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -24,6 +25,6 @@ public class ItemWaterwheel extends ItemBlock {
 
         tooltip.add(EnumColor.GREY + CommonProxy.localize("tooltip.waterwheel"));
         tooltip.add(EnumColor.AQUA + CommonProxy.localize("tooltip.power_generation") + ": " +
-                CommonProxy.localize("tooltip.waterwheel.pg"));
+                TileWaterwheel.maxExtract + " rf/t");
     }
 }

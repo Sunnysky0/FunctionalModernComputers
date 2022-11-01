@@ -8,6 +8,7 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Objects;
@@ -44,7 +45,8 @@ public class CommonProxy {
      * This is the second initialization event. Register custom recipes
      */
     public void init(FMLInitializationEvent event) {
-
+        log.info("Registering GUI Handler");
+        NetworkRegistry.INSTANCE.registerGuiHandler(FunctionalModernComputers.INSTANCE, new GuiProxy());
     }
 
     /**
