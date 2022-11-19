@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"1": "fmc:blocks/duct_side",
+		"particle": "fmc:blocks/energy_duct"
+	},
+	"elements": [
+		{
+			"from": [5, 5, 0],
+			"to": [11, 11, 5],
+			"faces": {
+				"north": {"uv": [0, 6, 3, 9], "texture": "#1"},
+				"east": {"uv": [0, 0, 3.5, 3], "texture": "#1"},
+				"south": {"uv": [6.5, 0, 9.5, 3], "texture": "#1"},
+				"west": {"uv": [0, 3, 3.5, 6], "texture": "#1"},
+				"up": {"uv": [6.5, 3.5, 3.5, 0], "texture": "#1"},
+				"down": {"uv": [6.5, 3.5, 3.5, 7], "texture": "#1"}
+			}
+		}
+	]
+}

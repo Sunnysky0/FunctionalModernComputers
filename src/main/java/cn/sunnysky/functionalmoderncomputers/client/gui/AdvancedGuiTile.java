@@ -1,6 +1,5 @@
 package cn.sunnysky.functionalmoderncomputers.client.gui;
 
-import cn.sunnysky.functionalmoderncomputers.api.IWithTileEntity;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,4 +27,9 @@ public abstract class AdvancedGuiTile<TILE extends TileEntity> extends AdvancedG
 
     }
 
+    @Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
+        tileEntity.validate();
+    }
 }

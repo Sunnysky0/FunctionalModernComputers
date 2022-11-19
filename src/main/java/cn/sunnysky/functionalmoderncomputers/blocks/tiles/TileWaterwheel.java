@@ -1,32 +1,33 @@
 package cn.sunnysky.functionalmoderncomputers.blocks.tiles;
 
-import cn.sunnysky.functionalmoderncomputers.blocks.Waterwheel;
+import cn.sunnysky.functionalmoderncomputers.client.gui.impl.GuiWaterwheel;
+import cn.sunnysky.functionalmoderncomputers.inventory.IInteractiveUI;
+import cn.sunnysky.functionalmoderncomputers.inventory.WaterwheelContainer;
 import cn.sunnysky.functionalmoderncomputers.util.CapabilityUtil;
-import cn.sunnysky.functionalmoderncomputers.util.ForgeDirection;
 import cofh.redstoneflux.api.IEnergyProvider;
-import cofh.redstoneflux.api.IEnergyReceiver;
 import cofh.redstoneflux.impl.EnergyStorage;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.CapabilityItemHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileWaterwheel extends TileEntity implements IEnergyProvider, ITickable {
+public class TileWaterwheel extends TileElectricAppliance implements IEnergyProvider, ITickable, IInteractiveUI {
 
-    public EnergyStorage storage = new EnergyStorage((int) Math.pow(2,15));
-
-    public static final int maxExtract = 256;
+    public static final int maxExtract = 64;
 
     private final IEnergyStorage energyCap;
 
     public TileWaterwheel() {
+        storage = new EnergyStorage((int) Math.pow(4,7),maxExtract);
         energyCap = CapabilityUtil.newEnergyProviderCap(storage);
     }
 
@@ -49,12 +50,12 @@ public class TileWaterwheel extends TileEntity implements IEnergyProvider, ITick
 
     @Override
     public int getEnergyStored(EnumFacing from) {
-        return storage.getEnergyStored();
+        return energy();
     }
 
     @Override
     public int getMaxEnergyStored(EnumFacing from) {
-        return storage.getMaxEnergyStored();
+        return maxEnergy();
     }
 
     @Override
@@ -85,22 +86,16 @@ public class TileWaterwheel extends TileEntity implements IEnergyProvider, ITick
                 instanceof TileWaterProvider)
             storage.receiveEnergy(TileWaterwheel.maxExtract,false);
 
-        if ((storage.getEnergyStored() > 0)) {
-            for (int i = 0; i < 6; i++){
-                TileEntity tile = getWorld().getTileEntity(
-                        new BlockPos(xCoord + ForgeDirection.getOrientation(i).offsetX,
-                                yCoord + ForgeDirection.getOrientation(i).offsetY,
-                                zCoord + ForgeDirection.getOrientation(i).offsetZ)
-                );
-                if (tile instanceof IEnergyReceiver) {
-                    storage.extractEnergy(
-                            ((IEnergyReceiver) tile).receiveEnergy(
-                                    ForgeDirection.cast(ForgeDirection.getOrientation(i).getOpposite()),
-                                    storage.extractEnergy(storage.getMaxExtract(), true),
-                                    false),
-                            false);
-                }
-            }
-        }
+        this.sendEnergy();
+    }
+
+    @Override
+    public Container newContainer(@Nonnull EntityPlayer player, int ID, int... xyz) {
+        return new WaterwheelContainer(player.inventory,this);
+    }
+
+    @Override
+    public GuiContainer newGui(@Nonnull EntityPlayer player, int ID, int... xyz) {
+        return new GuiWaterwheel(player.inventory,this);
     }
 }

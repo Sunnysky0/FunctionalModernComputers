@@ -1,14 +1,8 @@
 package cn.sunnysky.functionalmoderncomputers.client.gui;
 
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import javax.annotation.Nonnull;
-
 import cn.sunnysky.functionalmoderncomputers.FunctionalModernComputers;
-import cn.sunnysky.functionalmoderncomputers.util.EnumColor;
 import cn.sunnysky.functionalmoderncomputers.client.gui.elements.GuiElement;
+import cn.sunnysky.functionalmoderncomputers.util.EnumColor;
 import cn.sunnysky.functionalmoderncomputers.util.RenderUtil;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -24,16 +18,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
+import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  *  Copied from Mekanism
+ *  Edited to adapted local requirements
  */
 @SideOnly(Side.CLIENT)
 public abstract class AdvancedGui extends GuiContainer implements IGuiWrapper {
 
-    private Set<GuiElement> guiElements = new HashSet<>();
+    private Set<GuiElement> guiElements;
 
     public AdvancedGui(Container container) {
         super(container);
+        guiElements = new HashSet<>();
     }
 
     public static boolean isTextboxKey(char c, int i) {
@@ -70,6 +72,12 @@ public abstract class AdvancedGui extends GuiContainer implements IGuiWrapper {
             fontRenderer.drawString(text, (int) (x * reverse), (int) ((y * reverse) + yAdd), color);
             GlStateManager.popMatrix();
         }
+    }
+
+    @Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
+        guiElements = null;
     }
 
     @Override

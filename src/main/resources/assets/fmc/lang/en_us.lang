@@ -19,6 +19,7 @@ item.turbine_blade.name=Turbine Blade
 
 tile.waterwheel.name=Waterwheel Generator
 tile.water_provider.name=Water Supply Tank
+tile.energy_duct.name=Energy Duct
 
 #######
 # Gui #

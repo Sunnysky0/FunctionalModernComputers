@@ -22,6 +22,7 @@ public class InfiniteWaterProvider extends BlockBase implements IWithTileEntity<
     public InfiniteWaterProvider() {
         super(Material.IRON, "water_provider");
         this.setCreativeTab(FMCMainGroup.FMC_MAIN_GROUP);
+        this.setHardness(22);
     }
 
     @Override

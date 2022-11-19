@@ -31,6 +31,7 @@ public class Waterwheel extends BlockWithDirection implements IWithTileEntity<Ti
     public Waterwheel() {
         super(Material.IRON, name);
         this.setCreativeTab(FMCMainGroup.FMC_MAIN_GROUP);
+        this.setHardness(22);
     }
 
     @Override
@@ -61,7 +62,6 @@ public class Waterwheel extends BlockWithDirection implements IWithTileEntity<Ti
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        FunctionalModernComputers.log.info("On block activated");
         if (!worldIn.isRemote) {
             playerIn.openGui(FunctionalModernComputers.INSTANCE, GuiProxy.WATERWHEEL_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }

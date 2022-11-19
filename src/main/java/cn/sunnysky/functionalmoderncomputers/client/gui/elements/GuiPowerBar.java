@@ -1,5 +1,6 @@
 package cn.sunnysky.functionalmoderncomputers.client.gui.elements;
 
+import cn.sunnysky.functionalmoderncomputers.blocks.tiles.TileElectricAppliance;
 import cn.sunnysky.functionalmoderncomputers.client.gui.IGuiWrapper;
 import cn.sunnysky.functionalmoderncomputers.client.gui.elements.GuiElement;
 import cn.sunnysky.functionalmoderncomputers.util.GeneralUtil;
@@ -15,27 +16,26 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiPowerBar extends GuiElement {
 
-    private final IEnergyHandler tileEntity;
+    private final TileElectricAppliance tileEntity;
     private final IPowerInfoHandler handler;
     private final int xLocation;
     private final int yLocation;
     private final int width = 6;
     private final int height = 56;
 
-    public GuiPowerBar(IGuiWrapper gui, IEnergyHandler tile, ResourceLocation def, int x, int y) {
+    public GuiPowerBar(IGuiWrapper gui, TileElectricAppliance tile, ResourceLocation def, int x, int y) {
         super(GeneralUtil.getResource(GeneralUtil.ResourceType.GUI_ELEMENT, "GuiPowerBar.png"), gui, def);
         tileEntity = tile;
 
         handler = new IPowerInfoHandler() {
             @Override
             public String getTooltip() {
-                return GeneralUtil.getEnergyDisplay(tileEntity.getEnergyStored(EnumFacing.NORTH), tileEntity.getMaxEnergyStored(EnumFacing.NORTH));
+                return GeneralUtil.getEnergyDisplay(tileEntity.energy(), tileEntity.maxEnergy());
             }
 
             @Override
             public double getLevel() {
-                assert tileEntity != null;
-                return (double) tileEntity.getEnergyStored(EnumFacing.NORTH) / tileEntity.getMaxEnergyStored(EnumFacing.NORTH);
+                return (double) tileEntity.energy() / tileEntity.maxEnergy();
             }
         };
 

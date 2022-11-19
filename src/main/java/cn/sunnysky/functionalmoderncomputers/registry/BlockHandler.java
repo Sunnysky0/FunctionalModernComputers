@@ -3,10 +3,8 @@ package cn.sunnysky.functionalmoderncomputers.registry;
 import cn.sunnysky.functionalmoderncomputers.api.IWithTileEntity;
 import cn.sunnysky.functionalmoderncomputers.blocks.InfiniteWaterProvider;
 import cn.sunnysky.functionalmoderncomputers.blocks.Waterwheel;
-import cn.sunnysky.functionalmoderncomputers.items.ANDGate;
-import cn.sunnysky.functionalmoderncomputers.items.ORGate;
+import cn.sunnysky.functionalmoderncomputers.blocks.multiparts.EnergyDuct;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +16,8 @@ public class BlockHandler {
     public static final Waterwheel WATERWHEEL = new Waterwheel();
 
     public static final InfiniteWaterProvider INFINITE_WATER_PROVIDER = new InfiniteWaterProvider();
+
+    public static final EnergyDuct ENERGY_DUCT = new EnergyDuct();
 
     public static void register(Block i){BLOCKS.add(i);}
 
