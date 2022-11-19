@@ -25,6 +25,8 @@ public abstract class BlockDuct extends BlockBase
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
+    public static final PropertyBool UP = PropertyBool.create("up");
+    public static final PropertyBool DOWN = PropertyBool.create("down");
     private final boolean canDrop;
 
     protected BlockDuct(Material materialIn, boolean canDrop, String name)
@@ -40,7 +42,9 @@ public abstract class BlockDuct extends BlockBase
         return state.withProperty(NORTH, canDuctConnectTo(worldIn, pos, EnumFacing.NORTH))
                 .withProperty(SOUTH, canDuctConnectTo(worldIn, pos, EnumFacing.SOUTH))
                 .withProperty(WEST,  canDuctConnectTo(worldIn, pos, EnumFacing.WEST))
-                .withProperty(EAST,  canDuctConnectTo(worldIn, pos, EnumFacing.EAST));
+                .withProperty(EAST,  canDuctConnectTo(worldIn, pos, EnumFacing.EAST))
+                .withProperty(UP,  canDuctConnectTo(worldIn, pos, EnumFacing.UP))
+                .withProperty(DOWN,  canDuctConnectTo(worldIn, pos, EnumFacing.DOWN));
     }
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
@@ -117,7 +121,7 @@ public abstract class BlockDuct extends BlockBase
 
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
+        return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH,UP,DOWN);
     }
 
     @Override
