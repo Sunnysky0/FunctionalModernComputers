@@ -10,7 +10,7 @@ public class EnergyNetwork extends BlockNetwork<EnergyNetworkMember>{
     public Set<TileEntity> receivers = new HashSet<>();
     public Set<TileEntity> senders = new HashSet<>();
 
-    private EnergyStorage storage = new EnergyStorage((int) Math.pow(2,25),1024);
+    private EnergyStorage storage = new EnergyStorage(Integer.MAX_VALUE,256);
 
     protected EnergyNetwork() {
         super();
@@ -19,7 +19,34 @@ public class EnergyNetwork extends BlockNetwork<EnergyNetworkMember>{
         this.interfaces.add(senders);
     }
 
+    protected void addEnergy(int energy){
+        storage.setEnergyStored(storage.getEnergyStored() + energy);
+    }
+
+    @Override
+    public BlockNetwork<EnergyNetworkMember> newInstance() {
+        return new EnergyNetwork();
+    }
+
+    @Override
+    protected void refresh() {
+        storage = storage.setCapacity(members.size() * 1024);
+    }
+
     public EnergyStorage getStorage() {
         return storage;
     }
+
+    @Override
+    public void merge(BlockNetwork<EnergyNetworkMember> target) {
+        super.merge(target);
+        final EnergyNetwork affiliation = (EnergyNetwork) members.get(0).affiliation();
+        if (affiliation != null) {
+            affiliation.addEnergy(this.storage.getEnergyStored());
+            affiliation.addEnergy(((EnergyNetwork) target).storage.getEnergyStored());
+        }
+
+    }
+
+
 }

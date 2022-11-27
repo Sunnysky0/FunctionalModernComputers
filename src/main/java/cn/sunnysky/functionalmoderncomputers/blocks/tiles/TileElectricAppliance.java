@@ -1,6 +1,7 @@
 package cn.sunnysky.functionalmoderncomputers.blocks.tiles;
 
 import cn.sunnysky.functionalmoderncomputers.blocks.multiparts.EnergyDuct;
+import cn.sunnysky.functionalmoderncomputers.util.CapabilityUtil;
 import cn.sunnysky.functionalmoderncomputers.util.ForgeDirection;
 import cofh.redstoneflux.api.IEnergyHandler;
 import cofh.redstoneflux.api.IEnergyProvider;
@@ -11,15 +12,37 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+
+import javax.annotation.Nullable;
 
 public abstract class TileElectricAppliance extends TileEntity implements IEnergyHandler {
     public EnergyStorage storage;
 
+    protected final IEnergyStorage energyCap;
+
+    protected TileElectricAppliance() {
+        energyCap = CapabilityUtil.newEnergyProviderCap(storage);
+    }
+
     public int energy(){ return storage.getEnergyStored(); }
 
     public int maxEnergy(){ return storage.getMaxEnergyStored(); }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilityEnergy.ENERGY;
+    }
+
+    @Nullable
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if(capability == CapabilityEnergy.ENERGY)
+            return CapabilityEnergy.ENERGY.cast(energyCap);
+        return super.getCapability(capability,facing);
+    }
 
     public static boolean canConnectEnergy(IBlockAccess blockAccess, IBlockState state, BlockPos pos, EnumFacing facing){
         if (state.getBlock() instanceof EnergyDuct) return true;
