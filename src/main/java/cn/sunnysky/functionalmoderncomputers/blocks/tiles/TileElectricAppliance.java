@@ -27,9 +27,17 @@ public abstract class TileElectricAppliance extends TileEntity implements IEnerg
         energyCap = CapabilityUtil.newEnergyProviderCap(storage);
     }
 
-    public int energy(){ return storage.getEnergyStored(); }
+    public int energy(){
+        if (storage != null)
+            return storage.getEnergyStored();
+        return 0;
+    }
 
-    public int maxEnergy(){ return storage.getMaxEnergyStored(); }
+    public int maxEnergy(){
+        if (storage != null)
+            return storage.getMaxEnergyStored();
+        return 0;
+    }
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {

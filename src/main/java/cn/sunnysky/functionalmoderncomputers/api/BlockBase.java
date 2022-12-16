@@ -20,6 +20,6 @@ public abstract class BlockBase extends Block implements IWithModel{
     }
 
     protected void registerItemBlock(String name){
-        ItemHandler.register(new ItemBlock(this).setRegistryName(name));
+        ItemHandler.register(new ItemBlock(this).setRegistryName(name).setFull3D());
     }
 }

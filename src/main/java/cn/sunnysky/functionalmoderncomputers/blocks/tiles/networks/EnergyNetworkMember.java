@@ -11,9 +11,10 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class EnergyNetworkMember extends TileElectricAppliance implements NetworkMember, IEnergyReceiver, IEnergyProvider, ITickable {
     private Set<TileEntity> receivers = new HashSet<>();
@@ -26,21 +27,6 @@ public class EnergyNetworkMember extends TileElectricAppliance implements Networ
     }
 
     public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-        if (world.getTileEntity(neighbor) instanceof EnergyNetworkMember)
-            connectors.add(((EnergyNetworkMember) world.getTileEntity(pos)));
-
-        AtomicReference<EnergyNetworkMember> waitingForDisconnection = new AtomicReference<>();
-
-        connectors.forEach(e -> {
-            if (e instanceof EnergyNetworkMember)
-                if (((EnergyNetworkMember) e).getPos().compareTo(neighbor) == 0)
-                    if (!(world.getTileEntity(neighbor) instanceof EnergyNetworkMember))
-                        waitingForDisconnection.set((EnergyNetworkMember) e);
-        });
-
-        final EnergyNetworkMember energyNetworkMember = waitingForDisconnection.get();
-        if (energyNetworkMember != null)
-            connectors.remove(energyNetworkMember);
 
         if (TileElectricAppliance.canReceiveEnergy(world, world.getBlockState(neighbor),neighbor, EnumFacing.EAST ))
             receivers.add(world.getTileEntity(neighbor));
@@ -51,8 +37,6 @@ public class EnergyNetworkMember extends TileElectricAppliance implements Networ
             affiliation.receivers.addAll(receivers);
             affiliation.senders.addAll(senders);
         }
-
-
     }
 
     @Override
@@ -100,43 +84,74 @@ public class EnergyNetworkMember extends TileElectricAppliance implements Networ
 
     @Override
     public void update() {
-        if (affiliation == null){
-            int xCoord = getPos().getX();
-            int yCoord = getPos().getY();
-            int zCoord = getPos().getZ();
+        int xCoord = getPos().getX();
+        int yCoord = getPos().getY();
+        int zCoord = getPos().getZ();
+        boolean merge = false;
 
-            boolean merge = false;
+        Collection<NetworkMember> waitingForDisconnection = new ArrayList<>(6);
+        for (int i = 0; i < 6; i++){
+            final BlockPos pos1 = new BlockPos(xCoord + ForgeDirection.getOrientation(i).offsetX,
+                    yCoord + ForgeDirection.getOrientation(i).offsetY,
+                    zCoord + ForgeDirection.getOrientation(i).offsetZ);
 
-            for (int i = 0; i < 6; i++){
-                TileEntity tile = getWorld().getTileEntity(
-                        new BlockPos(xCoord + ForgeDirection.getOrientation(i).offsetX,
-                                yCoord + ForgeDirection.getOrientation(i).offsetY,
-                                zCoord + ForgeDirection.getOrientation(i).offsetZ)
-                );
+            TileEntity tile = getWorld().getTileEntity(pos1);
 
-                if ( tile == null )
-                    continue;
-
-                if (tile instanceof EnergyNetworkMember)
-                    if (((EnergyNetworkMember) tile).affiliation() != null)
-                        if(!merge){
-                            this.affiliation = ((EnergyNetworkMember) tile).affiliation;
-                            affiliation.join(this);
-                            merge = true;
-                        }else {
-                            if (this.affiliation != null)
-                                this.affiliation.merge(((EnergyNetworkMember) tile).affiliation);
-                        }
+            if (!(tile instanceof EnergyNetworkMember)) {
+                for (NetworkMember e : connectors){
+                    if (e instanceof TileEntity)
+                        if (((TileEntity) e).getPos().compareTo(pos1) == 0)
+                            waitingForDisconnection.add(e);
+                }
+                continue;
             }
+            if (affiliation == null)
+                if (((EnergyNetworkMember) tile).affiliation() != null)
+                            if(!merge){
+                                this.affiliation = ((EnergyNetworkMember) tile).affiliation;
+                                affiliation.join(this);
+                                merge = true;
+                            }else {
+                                if (this.affiliation != null)
+                                    this.affiliation.merge(((EnergyNetworkMember) tile).affiliation);
+                            }
 
-            if (affiliation == null) {
-                affiliation = new EnergyNetwork();
-                affiliation.join(this);
-            }
-            return;
+            if (!connectors.contains(tile))
+                connectors.add((NetworkMember) tile);
+
         }
+
+        connectors.removeAll(waitingForDisconnection);
+
+        if (affiliation == null) {
+            affiliation = new EnergyNetwork(getWorld());
+            affiliation.join(this);
+        }
+
         this.affiliation.refresh();
         this.sendEnergy(affiliation.getStorage());
+    }
+
+    private void refreshConnectors(){
+        int xCoord = getPos().getX();
+        int yCoord = getPos().getY();
+        int zCoord = getPos().getZ();
+
+        Collection<NetworkMember> members = new ArrayList<>(6);
+        for (int i = 0; i < 6; i++){
+            final BlockPos pos1 = new BlockPos(xCoord + ForgeDirection.getOrientation(i).offsetX,
+                    yCoord + ForgeDirection.getOrientation(i).offsetY,
+                    zCoord + ForgeDirection.getOrientation(i).offsetZ);
+
+            TileEntity tile = getWorld().getTileEntity(pos1);
+
+            if(tile instanceof EnergyNetworkMember)
+                members.add((NetworkMember) tile);
+
+        }
+
+        connectors.clear();
+        connectors.addAll(members);
     }
 
     @Override
@@ -146,10 +161,11 @@ public class EnergyNetworkMember extends TileElectricAppliance implements Networ
 
     @Override
     public void disconnect() {
+        refreshConnectors();
         if (affiliation != null)
             affiliation.remove(this);
 
-        if (connectors.size() > 1)
+        if (connectors.size() > 1 && affiliation != null)
             affiliation.split(this);
 
         connectors.clear();

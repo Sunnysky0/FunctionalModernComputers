@@ -14,6 +14,7 @@ gui.infinite=∞
 tile.waterwheel.name=水轮机
 tile.water_provider.name=水轮机供水槽
 tile.energy_duct.name=能量导管
+tile.charger.name=充电器
 
 tooltip.usage=用法
 tooltip.power_generation=发电量

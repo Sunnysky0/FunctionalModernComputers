@@ -2,6 +2,7 @@ package cn.sunnysky.functionalmoderncomputers;
 
 import cn.sunnysky.functionalmoderncomputers.api.IWithTileEntity;
 import cn.sunnysky.functionalmoderncomputers.registry.BlockHandler;
+import cn.sunnysky.functionalmoderncomputers.registry.ObjectRegistryHandler;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.translation.I18n;
@@ -22,6 +23,8 @@ public class CommonProxy {
      * The registry events below will have fired prior to entry to this method.
      */
     public void preInit(FMLPreInitializationEvent event) {
+        ObjectRegistryHandler.registerBlocks();
+        ObjectRegistryHandler.registerItems();
         log.info("Registering tile entities");
         loadTiles(event);
     }
@@ -57,6 +60,10 @@ public class CommonProxy {
     }
 
     public void registerItemRenderer(Item item, int meta, String id) {
+
+    }
+
+    public void registerItemModelRenderer(Item item, int meta, String id){
 
     }
 

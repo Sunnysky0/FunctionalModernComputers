@@ -1,0 +1,41 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "custom": { "flip-v": true },
+    "model": "fmc:charger.obj"
+  },
+
+  "variants": {
+    "normal": [{}],
+    "north":  {
+      "false": {},
+       "true": {
+         "apply": {
+          "model": "fmc:charger_plug.obj","y": 90 }
+        }
+    },
+    "south":  {
+      "false": {},
+      "true": {
+        "apply": {
+          "model": "fmc:charger_plug.obj","y": -90 }
+      }
+    },
+    "east":  {
+      "false": {},
+      "true": {
+        "apply": {
+          "model": "fmc:charger_plug.obj","y": 180 }
+      }
+    },
+    "west":  {
+      "false": {},
+      "true": {
+        "apply": {
+          "model": "fmc:charger_plug.obj"}
+      }
+    },
+
+    "inventory": [{"transform": "forge:default-block"}]
+  }
+}

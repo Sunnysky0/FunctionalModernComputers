@@ -1,12 +1,10 @@
 package cn.sunnysky.functionalmoderncomputers.registry;
 
 import cn.sunnysky.functionalmoderncomputers.api.IWithModel;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import static cn.sunnysky.functionalmoderncomputers.FunctionalModernComputers.log;
 
@@ -18,12 +16,11 @@ public class ObjectRegistryHandler {
 
 
     /** Listen for the register event for creating custom items */
-    @SubscribeEvent
-    public static void addItems(RegistryEvent.Register<Item> event) {
+    public static void registerItems() {
         log.info("Generating rods");
         ItemHandler.createCraftingMaterials();
         log.info("Registering items");
-        event.getRegistry().registerAll(ItemHandler.items());
+        ForgeRegistries.ITEMS.registerAll(ItemHandler.items());
         log.info("Registered " + ItemHandler.size() + " items");
            /*
              event.getRegistry().register(new ItemBlock(Blocks.myBlock).setRegistryName(MOD_ID, "myBlock"));
@@ -31,10 +28,9 @@ public class ObjectRegistryHandler {
             */
     }
     /** Listen for the register event for creating custom blocks */
-    @SubscribeEvent
-    public static void addBlocks(RegistryEvent.Register<Block> event) {
+    public static void registerBlocks() {
         log.info("Registering blocks");
-        event.getRegistry().registerAll(BlockHandler.blocks());
+        ForgeRegistries.BLOCKS.registerAll(BlockHandler.blocks());
         log.info("Registered " + BlockHandler.size() + " blocks");
            /*
              event.getRegistry().register(new MySpecialBlock().setRegistryName(MOD_ID, "mySpecialBlock"));

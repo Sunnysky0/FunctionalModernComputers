@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 
 import static cn.sunnysky.functionalmoderncomputers.FunctionalModernComputers.proxy;
 
-public class EnergyDuct extends BlockDuct implements IWithTileEntity {
+public class EnergyDuct extends BlockMultipart implements IWithTileEntity {
     public static final String name = "energy_duct";
     private EnergyNetworkMember tileEntity;
 

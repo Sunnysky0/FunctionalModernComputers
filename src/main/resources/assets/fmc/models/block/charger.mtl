@@ -1,0 +1,8 @@
+# Made in Blockbench 4.3.1
+newmtl m_0
+map_Kd fmc:models/base
+
+newmtl m_1
+map_Kd fmc:models/ring
+
+newmtl none

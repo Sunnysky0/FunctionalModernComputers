@@ -1,6 +1,7 @@
 package cn.sunnysky.functionalmoderncomputers.registry;
 
 import cn.sunnysky.functionalmoderncomputers.api.IWithTileEntity;
+import cn.sunnysky.functionalmoderncomputers.blocks.multiparts.Charger;
 import cn.sunnysky.functionalmoderncomputers.blocks.InfiniteWaterProvider;
 import cn.sunnysky.functionalmoderncomputers.blocks.Waterwheel;
 import cn.sunnysky.functionalmoderncomputers.blocks.multiparts.EnergyDuct;
@@ -18,6 +19,8 @@ public class BlockHandler {
     public static final InfiniteWaterProvider INFINITE_WATER_PROVIDER = new InfiniteWaterProvider();
 
     public static final EnergyDuct ENERGY_DUCT = new EnergyDuct();
+
+    public static final Charger CHARGER = new Charger();
 
     public static void register(Block i){BLOCKS.add(i);}
 
