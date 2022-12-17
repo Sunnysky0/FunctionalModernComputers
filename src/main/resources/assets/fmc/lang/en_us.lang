@@ -21,6 +21,8 @@ tile.waterwheel.name=Waterwheel Generator
 tile.water_provider.name=Water Supply Tank
 tile.energy_duct.name=Energy Duct
 tile.charger.name=Charger
+tile.monitor_screen.name=Monitor Screen
+tile.localhost.name=Local Host
 
 #######
 # Gui #

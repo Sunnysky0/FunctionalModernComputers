@@ -1,0 +1,6 @@
+# Made in Blockbench 4.5.2
+newmtl m_74a0b065-cb10-f763-76c7-68f17b1d40e8
+map_Kd fmc:models/screen
+newmtl m_915cfc25-05e2-3764-58bf-8937465b40ef
+map_Kd fmc:models/keyboard
+newmtl none

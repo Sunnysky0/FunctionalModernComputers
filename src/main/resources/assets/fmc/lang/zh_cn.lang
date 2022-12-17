@@ -15,6 +15,8 @@ tile.waterwheel.name=水轮机
 tile.water_provider.name=水轮机供水槽
 tile.energy_duct.name=能量导管
 tile.charger.name=充电器
+tile.monitor_screen.name=监视显示器
+tile.localhost.name=本地主机
 
 tooltip.usage=用法
 tooltip.power_generation=发电量
