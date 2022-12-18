@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 public abstract class TileElectricAppliance extends TileEntity implements IEnergyHandler {
     public EnergyStorage storage;
 
-    protected final IEnergyStorage energyCap;
+    protected IEnergyStorage energyCap;
 
     protected TileElectricAppliance() {
         energyCap = CapabilityUtil.newEnergyProviderCap(storage);
@@ -57,14 +57,12 @@ public abstract class TileElectricAppliance extends TileEntity implements IEnerg
         else if (blockAccess.getTileEntity(pos) instanceof IEnergyHandler) return true;
         else {
             final TileEntity tile = blockAccess.getTileEntity((pos));
-            if (tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite())) return true;
-            else return false;
+            return tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
         }
     }
 
     public static boolean canSendEnergy(IBlockAccess blockAccess, IBlockState state, BlockPos pos, EnumFacing facing){
-        if (state.getBlock() instanceof EnergyDuct) return false;
-        else if (blockAccess.getTileEntity(pos) instanceof IEnergyProvider) return true;
+        if (blockAccess.getTileEntity(pos) instanceof IEnergyProvider) return true;
         else {
             final TileEntity tile = blockAccess.getTileEntity((pos));
             if (tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite()))
@@ -77,8 +75,7 @@ public abstract class TileElectricAppliance extends TileEntity implements IEnerg
     }
 
     public static boolean canReceiveEnergy(IBlockAccess blockAccess, IBlockState state, BlockPos pos, EnumFacing facing){
-        if (state.getBlock() instanceof EnergyDuct) return false;
-        else if (blockAccess.getTileEntity(pos) instanceof IEnergyReceiver) return true;
+        if (blockAccess.getTileEntity(pos) instanceof IEnergyReceiver) return true;
         else {
             final TileEntity tile = blockAccess.getTileEntity((pos));
             if (tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite()))
@@ -93,7 +90,7 @@ public abstract class TileElectricAppliance extends TileEntity implements IEnerg
     protected void sendEnergy(){
         sendEnergy(this.storage);
     }
-    protected void sendEnergy(EnergyStorage storage){
+    protected void sendEnergy(EnergyStorage storage,Class<?>... excludedTypes){
         int xCoord = getPos().getX();
         int yCoord = getPos().getY();
         int zCoord = getPos().getZ();
@@ -109,6 +106,18 @@ public abstract class TileElectricAppliance extends TileEntity implements IEnerg
                 if ( tile == null )
                     continue;
 
+                boolean flag = false;
+                for (Class<?> type:
+                     excludedTypes) {
+                    if (type.isInstance(tile)) {
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if (flag)
+                    continue;
+
                 //Using FE
                 if (tile.hasCapability(CapabilityEnergy.ENERGY, EnumFacing.byIndex(i).getOpposite())){
                     IEnergyStorage target = tile.getCapability(CapabilityEnergy.ENERGY,EnumFacing.byIndex(i));
@@ -117,7 +126,7 @@ public abstract class TileElectricAppliance extends TileEntity implements IEnerg
                     if(target.canReceive()){
                         storage.extractEnergy(
                                 target.receiveEnergy(
-                                        storage.extractEnergy(storage.getMaxExtract(), true),
+                                        storage.extractEnergy(storage.getMaxExtract() / 6, true),
                                         false),
                                 false
                         );
@@ -132,7 +141,7 @@ public abstract class TileElectricAppliance extends TileEntity implements IEnerg
                     storage.extractEnergy(
                             ((IEnergyReceiver) tile).receiveEnergy(
                                     ForgeDirection.cast(ForgeDirection.getOrientation(i).getOpposite()),
-                                    storage.extractEnergy(storage.getMaxExtract(), true),
+                                    storage.extractEnergy(storage.getMaxExtract() / 6, true),
                                     false),
                             false);
                     this.markDirty();

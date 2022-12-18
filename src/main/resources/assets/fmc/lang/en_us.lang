@@ -23,6 +23,7 @@ tile.energy_duct.name=Energy Duct
 tile.charger.name=Charger
 tile.monitor_screen.name=Monitor Screen
 tile.localhost.name=Local Host
+tile.windmill.name=Windmill
 
 #######
 # Gui #

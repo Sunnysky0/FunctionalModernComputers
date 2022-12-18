@@ -2,7 +2,7 @@ package cn.sunnysky.functionalmoderncomputers.blocks.multiparts;
 
 import cn.sunnysky.functionalmoderncomputers.api.IWithTileEntity;
 import cn.sunnysky.functionalmoderncomputers.blocks.tiles.TileElectricAppliance;
-import cn.sunnysky.functionalmoderncomputers.blocks.tiles.networks.EnergyNetworkMember;
+import cn.sunnysky.functionalmoderncomputers.blocks.tiles.TileEnergyDuct;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,9 +20,8 @@ import javax.annotation.Nullable;
 
 import static cn.sunnysky.functionalmoderncomputers.FunctionalModernComputers.proxy;
 
-public class EnergyDuct extends BlockMultipart implements IWithTileEntity {
+public class EnergyDuct extends BlockMultipart implements IWithTileEntity<TileEnergyDuct> {
     public static final String name = "energy_duct";
-    private EnergyNetworkMember tileEntity;
 
     public EnergyDuct() {
         super(Material.IRON, true, name);
@@ -39,19 +38,12 @@ public class EnergyDuct extends BlockMultipart implements IWithTileEntity {
     }
 
     @Override
-    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-        TileEntity te = world.getTileEntity(pos);
-        if (te instanceof EnergyNetworkMember)
-            ((EnergyNetworkMember) te).onNeighborChange(world, pos, neighbor);
-    }
-
-    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntity te = worldIn.getTileEntity(pos);
-        if (te instanceof EnergyNetworkMember)
+        if (te instanceof TileEnergyDuct)
             playerIn.sendMessage(
                     new TextComponentString(
-                            "Energy stored: " + ((EnergyNetworkMember) te).getEnergyStored(facing) + " / " + ((EnergyNetworkMember) te).getMaxEnergyStored(facing)
+                            "Energy stored: " + ((TileEnergyDuct) te).getEnergyStored(facing) + " / " + ((TileEnergyDuct) te).getMaxEnergyStored(facing)
                     )
             );
         return true;
@@ -59,21 +51,18 @@ public class EnergyDuct extends BlockMultipart implements IWithTileEntity {
 
     @Override
     public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
-        if (tileEntity != null)
-            tileEntity.disconnect();
         super.onPlayerDestroy(worldIn, pos, state);
     }
 
     @Nonnull
     @Override
-    public Class tileClass() {
-        return EnergyNetworkMember.class;
+    public Class<TileEnergyDuct> tileClass() {
+        return TileEnergyDuct.class;
     }
 
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        tileEntity = new EnergyNetworkMember();
-        return tileEntity;
+        return new TileEnergyDuct();
     }
 }

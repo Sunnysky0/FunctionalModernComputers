@@ -20,5 +20,5 @@ public class LocalHost extends BlockWithDirection {
                 0,
                 "inventory");
     }
-    
+
 }

@@ -37,4 +37,38 @@ public class CapabilityUtil {
             }
         };
     }
+
+    public static IEnergyStorage newEnergyProcessorCap(EnergyStorage storage){
+        return new IEnergyStorage() {
+            @Override
+            public int receiveEnergy(int maxReceive, boolean simulate) {
+                return storage.receiveEnergy(maxReceive,simulate);
+            }
+
+            @Override
+            public int extractEnergy(int maxExtract, boolean simulate) {
+                return storage.extractEnergy(maxExtract,simulate);
+            }
+
+            @Override
+            public int getEnergyStored() {
+                return storage.getEnergyStored();
+            }
+
+            @Override
+            public int getMaxEnergyStored() {
+                return storage.getMaxEnergyStored();
+            }
+
+            @Override
+            public boolean canExtract() {
+                return true;
+            }
+
+            @Override
+            public boolean canReceive() {
+                return true;
+            }
+        };
+    }
 }

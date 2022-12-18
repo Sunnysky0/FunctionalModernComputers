@@ -4,8 +4,6 @@ import cn.sunnysky.functionalmoderncomputers.CommonProxy;
 import cn.sunnysky.functionalmoderncomputers.FunctionalModernComputers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -14,10 +12,10 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import org.apache.http.util.LangUtils;
 
 import javax.annotation.Nullable;
 
+//from Mekansim
 public class GeneralUtil {
     /**
      * Gets a ResourceLocation with a defined resource type and name.

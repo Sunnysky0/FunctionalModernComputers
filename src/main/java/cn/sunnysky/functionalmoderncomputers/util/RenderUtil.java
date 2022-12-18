@@ -4,9 +4,9 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+//from Mekansim
 public class RenderUtil {
     //Color
     public static void resetColor() {
