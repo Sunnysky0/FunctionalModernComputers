@@ -24,6 +24,7 @@ tile.charger.name=Charger
 tile.monitor_screen.name=Monitor Screen
 tile.localhost.name=Local Host
 tile.windmill.name=Windmill
+tile.windmill_base.name=Windmill Base
 
 #######
 # Gui #

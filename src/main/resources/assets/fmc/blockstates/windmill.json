@@ -6,6 +6,9 @@
   },
   "variants": {
     "normal": [{}],
-    "inventory": [{"transform": "forge:default-block"}]
+    "inventory": [
+      {"model":"fmc:windmill_inventory.obj"},
+      {"transform": "forge:default-block"}
+    ]
   }
 }

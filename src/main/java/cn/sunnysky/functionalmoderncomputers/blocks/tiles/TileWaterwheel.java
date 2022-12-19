@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 
 public class TileWaterwheel extends TileElectricAppliance implements IEnergyProvider, ITickable, IInteractiveUI {
 
-    public static final int maxExtract = 64;
+    public static final int maxExtract = 128;
 
 
 

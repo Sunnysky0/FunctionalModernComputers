@@ -14,7 +14,6 @@ public class BlockHandler {
     private static final List<Block> BLOCKS = new ArrayList<>();
 
     public static final Waterwheel WATERWHEEL = new Waterwheel();
-
     public static final InfiniteWaterProvider INFINITE_WATER_PROVIDER = new InfiniteWaterProvider();
 
     public static final EnergyDuct ENERGY_DUCT = new EnergyDuct();
@@ -26,6 +25,7 @@ public class BlockHandler {
     public static final LocalHost LOCAL_HOST = new LocalHost();
 
     public static final Windmill WINDMILL = new Windmill();
+    public static final WindmillBase WINDMILL_BASE = new WindmillBase();
 
     public static void register(Block i){BLOCKS.add(i);}
 

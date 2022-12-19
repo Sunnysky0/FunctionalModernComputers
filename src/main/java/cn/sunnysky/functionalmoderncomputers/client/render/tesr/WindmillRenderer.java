@@ -12,6 +12,12 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 public class WindmillRenderer extends TileEntitySpecialRenderer<TileWindmill> {
+
+    @Override
+    public boolean isGlobalRenderer(TileWindmill te) {
+        return true;
+    }
+
     @Override
     public void render(TileWindmill te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushAttrib();
@@ -31,13 +37,15 @@ public class WindmillRenderer extends TileEntitySpecialRenderer<TileWindmill> {
         GlStateManager.pushMatrix();
 
         GlStateManager.translate(.5, 0, .5);
-        long angle = (System.currentTimeMillis() / 10) % 360;
-        GlStateManager.rotate(angle, 0, 1, 0);
+
+        if (te.canRotate()) {
+            long angle = (System.currentTimeMillis() / 10) % 360;
+            GlStateManager.rotate(angle, 0, 1, 0);
+        }
 
         RenderHelper.disableStandardItemLighting();
         this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-        GlStateManager.enableLighting();
         if (Minecraft.isAmbientOcclusionEnabled()) {
             GlStateManager.shadeModel(GL11.GL_SMOOTH);
         } else {
@@ -45,7 +53,7 @@ public class WindmillRenderer extends TileEntitySpecialRenderer<TileWindmill> {
         }
 
         World world = te.getWorld();
-        // Translate back to local view coordinates so that we can do the acual rendering here
+        // Translate back to local view coordinates so that we can do the actual rendering here
         GlStateManager.translate(-te.getPos().getX(), -te.getPos().getY(), -te.getPos().getZ());
 
         Tessellator tessellator = Tessellator.getInstance();
