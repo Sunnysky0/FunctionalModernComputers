@@ -7,8 +7,10 @@
   "variants": {
     "normal": [{}],
     "inventory": [
-      {"model":"fmc:windmill_inventory.obj"},
-      {"transform": "forge:default-block"}
+      {
+        "model":"fmc:windmill_inventory.obj",
+        "transform": "forge:default-block"
+      }
     ]
   }
 }

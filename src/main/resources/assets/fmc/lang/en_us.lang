@@ -3,7 +3,7 @@ mod.fmc.name=Functional Modern Computers
 itemGroup.fmc.main=Functional Modern Computers
 
 ##########
-# Blocks #
+# Items #
 ##########
 
 item.andgate.name=AND Gate
@@ -25,6 +25,8 @@ tile.monitor_screen.name=Monitor Screen
 tile.localhost.name=Local Host
 tile.windmill.name=Windmill
 tile.windmill_base.name=Windmill Base
+tile.tesla_coil.name=Tesla Coil Core Block
+tile.high_tension_coil.name=High-Tension Coil
 
 #######
 # Gui #

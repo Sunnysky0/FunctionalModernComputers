@@ -1,0 +1,27 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "fmc:tesla_coil_core"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [
+      {"transform": "forge:default-block"}
+    ],
+    "facing": {
+      "north": {},
+      "south": {"y": 180},
+      "west": {"y": 270},
+      "east": {"y": 90},
+      "up": {"x": -90},
+      "down": {"x": 90}
+    },
+    "is_formed": {
+      "false": {},
+      "true": {
+        "custom": { "flip-v": true },
+        "model": "fmc:tesla_coil.obj"
+      }
+    }
+  }
+}

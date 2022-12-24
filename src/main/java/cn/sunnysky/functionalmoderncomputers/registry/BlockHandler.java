@@ -2,6 +2,8 @@ package cn.sunnysky.functionalmoderncomputers.registry;
 
 import cn.sunnysky.functionalmoderncomputers.api.IWithTileEntity;
 import cn.sunnysky.functionalmoderncomputers.blocks.*;
+import cn.sunnysky.functionalmoderncomputers.blocks.multiblocks.HighTensionCoil;
+import cn.sunnysky.functionalmoderncomputers.blocks.multiblocks.TeslaCoilCore;
 import cn.sunnysky.functionalmoderncomputers.blocks.multiparts.Charger;
 import cn.sunnysky.functionalmoderncomputers.blocks.multiparts.EnergyDuct;
 import net.minecraft.block.Block;
@@ -26,6 +28,9 @@ public class BlockHandler {
 
     public static final Windmill WINDMILL = new Windmill();
     public static final WindmillBase WINDMILL_BASE = new WindmillBase();
+
+    public static final TeslaCoilCore TESLA_COIL_CORE = new TeslaCoilCore();
+    public static final HighTensionCoil HIGH_TENSION_COIL = new HighTensionCoil();
 
     public static void register(Block i){BLOCKS.add(i);}
 

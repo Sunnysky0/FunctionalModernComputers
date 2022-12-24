@@ -19,6 +19,8 @@ tile.monitor_screen.name=监视显示器
 tile.localhost.name=本地主机
 tile.windmill.name=风力涡轮
 tile.windmill_base.name=风车底座
+tile.tesla_coil.name=特斯拉线圈核心组件
+tile.high_tension_coil.name=高压线圈
 
 tooltip.usage=用法
 tooltip.power_generation=发电量
