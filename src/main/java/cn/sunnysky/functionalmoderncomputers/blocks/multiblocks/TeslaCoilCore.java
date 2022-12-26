@@ -57,6 +57,8 @@ public class TeslaCoilCore extends StructureBlock<TileTeslaCoil> {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileTeslaCoil();
+        final TileTeslaCoil tileTeslaCoil = new TileTeslaCoil();
+        tileTeslaCoil.setWorld(worldIn);
+        return tileTeslaCoil;
     }
 }

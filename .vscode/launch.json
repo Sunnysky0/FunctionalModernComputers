@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "runClient",
+      "request": "launch",
+      "mainClass": "net.minecraftforge.legacydev.MainClient",
+      "classPaths": ["$Runtime","${workspaceFolder}\\build\\classes\\java\\main", "${workspaceFolder}\\build\\resources\\main"],
+      "projectName": "FunctionalModernComputers",
+      "cwd": "${workspaceFolder}\\run",
+      "vmArgs": "-Dforge.logging.console.level\u003ddebug -Dforge.logging.markers\u003dREGISTRIES",
+      "args": "",
+      "env": {
+        "MCP_TO_SRG": "F:\\Games\\Mods\\FunctionalModernComputers\\build\\createSrgToMcp\\output.srg",
+        "MOD_CLASSES": "",
+        "mainClass": "net.minecraft.launchwrapper.Launch",
+        "MCP_MAPPINGS": "stable_39-1.12",
+        "FORGE_VERSION": "14.23.5.2860",
+        "assetIndex": "1.12",
+        "assetDirectory": "C:\\Users\\clbla\\.gradle\\caches\\forge_gradle\\assets",
+        "nativesDirectory": "${workspaceFolder}\\build\\natives",
+        "FORGE_GROUP": "net.minecraftforge",
+        "tweakClass": "net.minecraftforge.fml.common.launcher.FMLTweaker",
+        "MC_VERSION": "${MC_VERSION}"
+      }
+    },
+    {
+      "type": "java",
+      "name": "runServer",
+      "request": "launch",
+      "mainClass": "net.minecraftforge.legacydev.MainServer",
+      "projectName": "FunctionalModernComputers",
+      "cwd": "${workspaceFolder}\\run",
+      "vmArgs": "-Dforge.logging.console.level\u003ddebug -Dforge.logging.markers\u003dREGISTRIES",
+      "args": "",
+      "env": {
+        "MCP_TO_SRG": "F:\\Games\\Mods\\FunctionalModernComputers\\build\\createSrgToMcp\\output.srg",
+        "MOD_CLASSES": "",
+        "mainClass": "net.minecraft.launchwrapper.Launch",
+        "MCP_MAPPINGS": "stable_39-1.12",
+        "FORGE_VERSION": "14.23.5.2860",
+        "FORGE_GROUP": "net.minecraftforge",
+        "tweakClass": "net.minecraftforge.fml.common.launcher.FMLServerTweaker",
+        "MC_VERSION": "${MC_VERSION}"
+      }
+    }
+  ]
+}

@@ -27,6 +27,10 @@ public abstract class StructureBlock<TE extends StructureTile> extends BlockWith
         world.setBlockState(pos, state.withProperty(IS_FORMED, true));
     }
 
+    public void onDeform(World world, BlockPos pos, IBlockState state){
+        world.setBlockState(pos,state.withProperty(IS_FORMED,false));
+    }
+
     public boolean isFormed(IBlockState state){
         return state.getValue(IS_FORMED);
     }

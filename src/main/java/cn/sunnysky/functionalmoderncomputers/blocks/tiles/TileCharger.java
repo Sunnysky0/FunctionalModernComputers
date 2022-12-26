@@ -1,5 +1,6 @@
 package cn.sunnysky.functionalmoderncomputers.blocks.tiles;
 
+import cn.sunnysky.functionalmoderncomputers.util.CapabilityUtil;
 import cofh.redstoneflux.api.IEnergyContainerItem;
 import cofh.redstoneflux.api.IEnergyReceiver;
 import cofh.redstoneflux.impl.EnergyStorage;
@@ -17,6 +18,7 @@ public class TileCharger extends TileElectricAppliance implements IEnergyReceive
 
     public TileCharger() {
         this.storage = new EnergyStorage((int) Math.pow(2,15),1024);
+        this.energyCap = CapabilityUtil.newEnergyReceiverCap(storage);
     }
 
     public ItemStack getStack() {

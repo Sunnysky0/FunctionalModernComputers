@@ -54,7 +54,7 @@ public abstract class TileElectricAppliance extends TileEntity implements IEnerg
 
     public static boolean canConnectEnergy(IBlockAccess blockAccess, IBlockState state, BlockPos pos, EnumFacing facing){
         if (state.getBlock() instanceof EnergyDuct) return true;
-        else if (blockAccess.getTileEntity(pos) instanceof IEnergyHandler) return true;
+        else if (blockAccess.getTileEntity(pos) instanceof IEnergyHandler) return ((IEnergyHandler) blockAccess.getTileEntity(pos)).canConnectEnergy(facing);
         else {
             final TileEntity tile = blockAccess.getTileEntity((pos));
             return tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite());

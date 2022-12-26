@@ -13,10 +13,10 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class MultiBlockStructure {
-    private Map<Block, BlockPos> structure = new HashMap<>();
+    private Map<BlockPos, Block> structure = new HashMap<>();
 
     public void addComponent(Block blockType, BlockPos relativePos){
-        structure.put(blockType,relativePos);
+        structure.put(relativePos, blockType);
     }
 
     public boolean verifyStructure(StructureCoreTile core){
@@ -25,9 +25,9 @@ public class MultiBlockStructure {
 
         final boolean[] isFormed = {true};
 
-        structure.forEach(new BiConsumer<Block, BlockPos>() {
+        structure.forEach(new BiConsumer<BlockPos, Block>() {
             @Override
-            public void accept(Block block, BlockPos blockPos) {
+            public void accept(BlockPos blockPos, Block block) {
                 IBlockState state = world.getBlockState(startPoint.add(blockPos));
                 Block localBlockType = state.getBlock();
 
@@ -41,13 +41,21 @@ public class MultiBlockStructure {
     }
 
     public boolean tryFormStructure(StructureCoreTile core){
-        if (!verifyStructure(core))
+        try {
+            if (!verifyStructure(core))
+                return false;
+        }catch (Exception e){
+            e.printStackTrace();
             return false;
+        }
+
+        if(core.isFormed && !core.needsToResume())
+            return true;
 
         World world = core.getWorld();
         BlockPos startPoint = core.getPos();
 
-        for (BlockPos relativePos : structure.values()){
+        for (BlockPos relativePos : structure.keySet()){
             final BlockPos localPos = startPoint.add(relativePos);
             IBlockState state = world.getBlockState(localPos);
             Block blockType = state.getBlock();
@@ -57,6 +65,10 @@ public class MultiBlockStructure {
 
                 if (te instanceof IStructureTile)
                     ((IStructureTile) te).setAffiliation(core);
+
+                if (te != null) {
+                    te.markDirty();
+                }
             }
 
             if (blockType instanceof StructureBlock)
@@ -65,6 +77,33 @@ public class MultiBlockStructure {
         }
 
         return true;
+    }
+
+    public void deformStructure(StructureCoreTile core){
+
+        World world = core.getWorld();
+        BlockPos startPoint = core.getPos();
+
+        for (BlockPos relativePos : structure.keySet()){
+            final BlockPos localPos = startPoint.add(relativePos);
+            IBlockState state = world.getBlockState(localPos);
+            Block blockType = state.getBlock();
+
+            if (blockType instanceof ITileEntityProvider){
+                TileEntity te = world.getTileEntity(localPos);
+
+                if (te instanceof IStructureTile)
+                    ((IStructureTile) te).setAffiliation(null);
+
+                if (te != null) {
+                    te.markDirty();
+                }
+            }
+
+            if (blockType instanceof StructureBlock)
+                ((StructureBlock<?>) blockType).onDeform(world,localPos,state);
+
+        }
     }
 
 
