@@ -35,7 +35,6 @@ public abstract class StructureBlock<TE extends StructureTile> extends BlockWith
         return state.getValue(IS_FORMED);
     }
 
-
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this,FACING,IS_FORMED);

@@ -1,0 +1,14 @@
+{
+  "exitWithMinecraft": false,
+  "javaPath": "F:\\Programs\\TJava\\jre\\bin\\java.exe",
+  "windowSizeWidth": 854,
+  "windowSizeHeight": 480,
+  "language": "zh",
+  "downloadSource": 2,
+  "accounts": [{
+    "playerName": "Sunnysky0",
+    "loginMethod": 0,
+    "selected": true
+  }],
+  "maxMemory": 6135
+}

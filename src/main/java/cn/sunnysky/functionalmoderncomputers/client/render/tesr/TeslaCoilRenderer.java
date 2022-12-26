@@ -15,10 +15,6 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 public class TeslaCoilRenderer extends TileEntitySpecialRenderer<TileTeslaCoil> {
-    @Override
-    public boolean isGlobalRenderer(TileTeslaCoil te) {
-        return true;
-    }
 
     @Override
     public void render(TileTeslaCoil te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

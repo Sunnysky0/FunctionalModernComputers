@@ -1,19 +1,17 @@
 package cn.sunnysky.functionalmoderncomputers.blocks.multiblocks;
 
-import cn.sunnysky.functionalmoderncomputers.blocks.tiles.multiblocks.MultiBlockHandler;
-import cn.sunnysky.functionalmoderncomputers.blocks.tiles.multiblocks.StructureCoreTile;
 import cn.sunnysky.functionalmoderncomputers.blocks.tiles.multiblocks.TileTeslaCoil;
 import cn.sunnysky.functionalmoderncomputers.client.render.tesr.TeslaCoilRenderer;
 import cn.sunnysky.functionalmoderncomputers.items.itemgroups.FMCMainGroup;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
@@ -30,10 +28,10 @@ public class TeslaCoilCore extends StructureBlock<TileTeslaCoil> {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        boolean b = MultiBlockHandler.TESLA_COIL.tryFormStructure((StructureCoreTile) worldIn.getTileEntity(pos));
-        if (!b)
-            playerIn.sendMessage(new TextComponentString("Invalid structure"));
-        return true;
+        if(isFormed(state))
+            return worldIn.addWeatherEffect(new EntityLightningBolt(worldIn,pos.getX(),pos.getY() + 3,pos.getZ(),false));
+
+        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
     @Override

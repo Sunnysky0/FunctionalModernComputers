@@ -1,6 +1,7 @@
 package cn.sunnysky.functionalmoderncomputers.blocks.tiles;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
 public class TileWindmill extends TileEntity {
@@ -12,5 +13,15 @@ public class TileWindmill extends TileEntity {
                                         getPos().getY() - 1,
                                         getPos().getZ()))
                         instanceof TileWindmillBase;
+    }
+
+    @Override
+    public boolean shouldRenderInPass(int pass) {
+        return true;
+    }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        return new AxisAlignedBB(getPos().add(-1,0,-1),getPos().add(1,2,1));
     }
 }

@@ -14,11 +14,6 @@ import org.lwjgl.opengl.GL11;
 public class WindmillRenderer extends TileEntitySpecialRenderer<TileWindmill> {
 
     @Override
-    public boolean isGlobalRenderer(TileWindmill te) {
-        return true;
-    }
-
-    @Override
     public void render(TileWindmill te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushAttrib();
         GlStateManager.pushMatrix();

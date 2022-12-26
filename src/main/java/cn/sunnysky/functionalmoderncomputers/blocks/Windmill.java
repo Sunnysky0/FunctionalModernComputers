@@ -29,6 +29,8 @@ public class Windmill extends BlockBase implements IWithTileEntity<TileWindmill>
         this.setCreativeTab(FMCMainGroup.FMC_MAIN_GROUP);
     }
 
+
+
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;

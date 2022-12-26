@@ -10,6 +10,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -100,6 +101,17 @@ public class Charger extends BlockMultipart implements IWithTileEntity<TileCharg
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileCharger();
+    }
+
+    @Override
+    public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
+        if (! worldIn.isRemote){
+            TileCharger te = (TileCharger) worldIn.getTileEntity(pos);
+            if (te != null)
+                if (!te.getStack().isEmpty())
+                    InventoryHelper.spawnItemStack(worldIn,pos.getX(),pos.getY(),pos.getZ(),te.getStack());
+        }
+        super.onPlayerDestroy(worldIn, pos, state);
     }
 
     @Override
