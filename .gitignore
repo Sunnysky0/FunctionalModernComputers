@@ -1,6 +1,11 @@
 # User-specific stuff
 .idea/
 
+#CMCL run time
+.minecraft/
+boost.by
+runClient.cmd
+
 *.iml
 *.ipr
 *.iws
