@@ -104,13 +104,11 @@ public class Charger extends BlockMultipart implements IWithTileEntity<TileCharg
     }
 
     @Override
-    public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
-        if (! worldIn.isRemote){
-            TileCharger te = (TileCharger) worldIn.getTileEntity(pos);
-            if (te != null)
-                if (!te.getStack().isEmpty())
-                    InventoryHelper.spawnItemStack(worldIn,pos.getX(),pos.getY(),pos.getZ(),te.getStack());
-        }
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        TileCharger te = (TileCharger) worldIn.getTileEntity(pos);
+        if (te != null)
+            InventoryHelper.spawnItemStack(worldIn,pos.getX(),pos.getY(),pos.getZ(),te.getStack());
+
         super.onPlayerDestroy(worldIn, pos, state);
     }
 
