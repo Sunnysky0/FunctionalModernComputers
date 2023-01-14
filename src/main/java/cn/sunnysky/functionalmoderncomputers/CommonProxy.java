@@ -2,7 +2,9 @@ package cn.sunnysky.functionalmoderncomputers;
 
 import cn.sunnysky.functionalmoderncomputers.api.IWithTileEntity;
 import cn.sunnysky.functionalmoderncomputers.registry.BlockHandler;
+import cn.sunnysky.functionalmoderncomputers.registry.ItemHandler;
 import cn.sunnysky.functionalmoderncomputers.registry.ObjectRegistryHandler;
+import cn.sunnysky.functionalmoderncomputers.world.OreGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.translation.I18n;
@@ -11,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -27,6 +30,8 @@ public class CommonProxy {
         ObjectRegistryHandler.registerItems();
         log.info("Registering tile entities");
         loadTiles(event);
+
+        registerOreDict();
     }
 
     public void loadTiles(FMLPreInitializationEvent event)
@@ -48,6 +53,8 @@ public class CommonProxy {
      * This is the second initialization event. Register custom recipes
      */
     public void init(FMLInitializationEvent event) {
+        log.info("Registering World Generator");
+        GameRegistry.registerWorldGenerator(new OreGenerator(),1);
         log.info("Registering GUI Handler");
         NetworkRegistry.INSTANCE.registerGuiHandler(FunctionalModernComputers.INSTANCE, new GuiProxy());
     }
@@ -77,5 +84,12 @@ public class CommonProxy {
     public void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String id)
     {
         GameRegistry.registerTileEntity(tileEntityClass, id);
+    }
+
+    /**
+     * Registers specified items with the Ore Dictionary.
+     */
+    public void registerOreDict() {
+        OreDictionary.registerOre("ingotTin", ItemHandler.TIN_ING0T.getDefaultInstance());
     }
 }

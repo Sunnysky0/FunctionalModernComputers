@@ -32,7 +32,13 @@ public class BlockHandler {
     public static final TeslaCoilCore TESLA_COIL_CORE = new TeslaCoilCore();
     public static final HighTensionCoil HIGH_TENSION_COIL = new HighTensionCoil();
 
+    public static final BlockOre TIN_ORE = createOre("tin_ore");
+
     public static void register(Block i){BLOCKS.add(i);}
+
+    private static BlockOre createOre(String registryName){
+        return new BlockOre(registryName);
+    }
 
     public static Block[] blocks(){ return  BLOCKS.toArray(new Block[0]); }
 
@@ -49,4 +55,5 @@ public class BlockHandler {
     }
 
     public static int size() { return BLOCKS.size(); }
+
 }

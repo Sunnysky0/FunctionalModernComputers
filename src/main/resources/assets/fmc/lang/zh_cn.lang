@@ -7,6 +7,10 @@ item.orgate.name=或门
 item.iron_rod.name=铁棒
 item.bearing.name=滚珠轴承
 item.turbine_blade.name=涡轮叶片
+item.paper_dielectric.name=纸介电容
+item.hammer.name=大锤子
+item.tin_ingot.name=锡锭
+item.tin_plate.name=锡板
 
 gui.infinite=∞
 
@@ -21,6 +25,8 @@ tile.windmill.name=风力涡轮
 tile.windmill_base.name=风车底座
 tile.tesla_coil.name=特斯拉线圈核心组件
 tile.high_tension_coil.name=高压线圈
+
+tile.tin_ingot.name=锡矿
 
 tooltip.usage=用法
 tooltip.power_generation=发电量

@@ -1,6 +1,7 @@
 package cn.sunnysky.functionalmoderncomputers.registry;
 
 import cn.sunnysky.functionalmoderncomputers.items.ANDGate;
+import cn.sunnysky.functionalmoderncomputers.items.Hammer;
 import cn.sunnysky.functionalmoderncomputers.items.ItemStaticRender;
 import cn.sunnysky.functionalmoderncomputers.items.ORGate;
 import cn.sunnysky.functionalmoderncomputers.items.itemgroups.FMCMainGroup;
@@ -17,7 +18,13 @@ public class ItemHandler {
 
     public static final ORGate OR_GATE = new ORGate();
 
+    public static final Item TIN_ING0T = createItem("tin_ingot");
+
+    public static final Item HAMMER = new Hammer();
+
     public static void register(Item i){ITEMS.add(i);}
+
+    public static void register(String registryName){new ItemStaticRender(registryName).setCreativeTab(FMCMainGroup.FMC_MAIN_GROUP);}
 
     public static Item[] items(){ return  ITEMS.toArray(new Item[0]); }
 
@@ -27,9 +34,17 @@ public class ItemHandler {
         ITEMS.forEach(c);
     }
 
+    public static Item createItem(String registryName){
+        return new ItemStaticRender(registryName).setCreativeTab(FMCMainGroup.FMC_MAIN_GROUP);
+    }
+
     public static void createCraftingMaterials(){
-        register(new ItemStaticRender("iron_rod").setCreativeTab(FMCMainGroup.FMC_MAIN_GROUP));
-        register(new ItemStaticRender("bearing").setCreativeTab(FMCMainGroup.FMC_MAIN_GROUP));
-        register(new ItemStaticRender("turbine_blade").setCreativeTab(FMCMainGroup.FMC_MAIN_GROUP));
+
+        register("iron_rod");
+        register("bearing");
+        register("turbine_blade");
+
+        register("paper_dielectric");
+        register("tin_plate");
     }
 }

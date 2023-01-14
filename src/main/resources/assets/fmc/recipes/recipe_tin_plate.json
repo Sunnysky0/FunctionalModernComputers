@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shapeless",
+  "result": {
+    "item": "fmc:tin_plate"
+  },
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotTin"
+    },
+    {
+      "item": "fmc:hammer",
+      "data": 0
+    }
+  ]
+}

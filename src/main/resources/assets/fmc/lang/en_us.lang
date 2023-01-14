@@ -12,6 +12,11 @@ item.orgate.name=OR Gate
 item.iron_rod.name=Iron Rod
 item.bearing.name=Bearing
 item.turbine_blade.name=Turbine Blade
+item.paper_dielectric.name=Paper Dielectric
+item.hammer.name=Powerful HAMMER
+
+item.tin_ingot.name=Tin Ingot
+item.tin_plate.name=Tin Plate
 
 ##########
 # Blocks #
@@ -27,6 +32,8 @@ tile.windmill.name=Windmill
 tile.windmill_base.name=Windmill Base
 tile.tesla_coil.name=Tesla Coil Core Block
 tile.high_tension_coil.name=High-Tension Coil
+
+tile.tin_ore.name=Tin Ore
 
 #######
 # Gui #
